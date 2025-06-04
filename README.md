@@ -1,303 +1,194 @@
-# 🎮 Null Command RTS
+# ⚠️ Null Command RTS - v0.0.1 EXPERIMENTAL
 
-A real-time strategy game prototype with placeholder graphics, built as a foundation for full art asset implementation.
+> **WARNING: This is an extremely early experimental prototype that barely works. Expect crashes, bugs, and incomplete features.**
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-v0.0.1-red.svg)
+![Status](https://img.shields.io/badge/status-experimental-orange.svg)
 ![.NET](https://img.shields.io/badge/.NET-6.0--windows-purple.svg)
 ![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)
 
-## 🎯 Game Overview
+A proof-of-concept real-time strategy game prototype using placeholder colored squares. This is NOT a playable game yet.
 
-Null Command is a minimalist RTS game where players build a hospital base, spawn soldier units, and defend against enemy waves. The current version uses colored placeholder squares for all visual elements.
+## 🚨 Current State (Brutal Honesty)
 
-## 🎮 Gameplay Features
+### What "Works" (Sort Of)
+- ✅ You can place a green square (hospital) with Shift+Click
+- ✅ Green square slowly changes color (construction "animation")
+- ✅ Clicking the hospital spawns red squares (soldiers)
+- ✅ Red squares move around randomly
+- ✅ Blue squares spawn from screen edges and wander toward your stuff
+- ✅ F12 hides the window (boss mode - the most reliable feature)
 
-### Core Mechanics
-- **Hospital Construction**: Shift+LMB on empty screen to place hospital
-- **Soldier Spawning**: Shift+LMB on hospital to spawn soldiers (2-second cooldown)
-- **Unit Selection**: Shift+LMB on soldiers to select individual/squad
-- **Movement Orders**: LMB to command selected units to move
-- **Boss Mode**: F12 to hide/show entire game (workplace stealth mode)
+### What Doesn't Work (Most Things)
+- ❌ Combat is barely implemented
+- ❌ Squad formation is hit-or-miss
+- ❌ Selection system is wonky
+- ❌ AI is extremely basic
+- ❌ Health/regeneration may or may not work
+- ❌ No sound, no real graphics, no polish
+- ❌ Probably crashes if you look at it wrong
 
-### Game Systems
-- **Squad Formation**: Soldiers automatically group into squads of 5
-- **Health Regeneration**: Units within 256 pixels of hospital regenerate health
-- **Enemy AI**: Enemies spawn at opposite screen edges, move toward hospital
-- **Combat System**: Automatic firing when units are in range
-- **Guard Behavior**: Soldiers return to guard positions after combat
+### Known Issues
+- May not start on some systems
+- Click detection is unreliable
+- Units get stuck or disappear
+- Memory leaks likely
+- Performance is terrible
+- Global mouse hooks may interfere with other apps
 
-## 🏗️ Technical Architecture
+## 🎯 The Vision (What It's Supposed to Become)
 
-### Built With
-- **Framework**: WPF (Windows Presentation Foundation)
-- **Target**: .NET 6.0-windows
-- **Input Handling**: Global mouse/keyboard hooks
-- **Rendering**: Canvas-based with placeholder Rectangle shapes
+Eventually this might become a proper RTS game where you:
+- Build a medical facility base
+- Spawn and command soldier squads
+- Fight against enemy waves
+- Use actual graphics instead of colored squares
 
-### Project Structure
-```
-null-command/
-├── NullCommand.csproj      # Project configuration
-├── MainWindow.xaml         # Window layout
-├── NullCommandGame.cs      # Main game logic
-└── README.md              # This documentation
-```
+But right now it's just colored rectangles moving around.
 
-### Core Classes
-- **Hospital**: Building with construction/idle states, soldier spawning
-- **Soldier**: Unit with AI states (Guard, Moving, Seeking, Combat)
-- **Squad**: Formation system for coordinated unit movement
-- **GameEntity**: Base class for all game objects
+## 🔧 Installation (Good Luck)
 
-## 🎨 Current Visual Design
-
-### Placeholder Assets
-- **Hospital**: 64x64 green rectangle with dark green border
-- **Player Soldiers**: 16x16 red rectangles with dark red border
-- **Enemy Soldiers**: 16x16 blue rectangles with dark blue border
-- **Selection Indicator**: Yellow border on selected units
-
-### Animation System
-- **Hospital**: 9-frame construction → 4-frame idle animation (placeholder timing)
-- **Units**: Position interpolation for smooth movement
-- **Frame Rate**: 60 FPS game loop with 16ms intervals
-
-## 🚀 Getting Started
-
-### Prerequisites
+### Requirements
 - Windows 10/11
-- .NET 6.0 Runtime (Windows)
+- .NET 6.0 Runtime
+- Patience
+- Low expectations
 
-### Building from Source
+### To Run (If It Runs)
 ```bash
-# Navigate to project directory
 cd null-command
-
-# Build the project
-dotnet build NullCommand.csproj
-
-# Run the application
 dotnet run
 ```
 
-### Controls
-| Input | Action |
-|-------|--------|
-| Shift + LMB | Place hospital (if none exists) |
-| Shift + LMB | Spawn soldier (on hospital) |
-| Shift + LMB | Select soldier (on unit) |
-| LMB | Move selected unit/squad |
-| F12 | Toggle boss mode |
+Or try the batch file:
+```
+run-game.bat
+```
 
-## 📋 Game Balance
+### If It Doesn't Work
+1. Install .NET 6.0 Runtime
+2. Pray to the debugging gods
+3. Try running as Administrator
+4. Check if Windows Defender quarantined it
+5. Give up and wait for v0.0.2
 
-### Unit Statistics
-- **Hospital**: 500 HP, 256px healing range, 10 HP/sec regeneration
-- **Soldiers**: 80 HP, 80px attack range, 120px detection range
-- **Combat**: 15 damage per shot, 1-second fire cooldown
-- **Movement**: 2.0 pixels/frame base speed
+## 🎮 Controls (Theoretical)
 
-### Spawn Mechanics
-- **Soldier Cooldown**: 2 seconds between hospital spawns
-- **Enemy Spawning**: 1 second cooldown, groups of 3 units
-- **Squad Size**: Maximum 5 soldiers per squad
+| Input | What Should Happen | What Actually Happens |
+|-------|-------------------|---------------------|
+| Shift + LMB | Place hospital | Sometimes works |
+| Shift + LMB on hospital | Spawn soldier | May spawn, may not |
+| Shift + LMB on soldier | Select unit | Selection is unpredictable |
+| LMB | Move selected unit | Unit might move somewhere |
+| F12 | Hide window | Actually works reliably |
 
----
+## 🧪 What's Actually Implemented
 
-# 🎨 ART & DEVELOPMENT HANDOFF DOCUMENT
+### Game Objects
+- **Hospital**: 64x64 green rectangle that changes shades
+- **Player Soldiers**: 16x16 red rectangles that move around
+- **Enemy Soldiers**: 16x16 blue rectangles from screen edges
+- **Selection**: Yellow border (when it works)
 
-## Asset Requirements Overview
+### Systems That Exist
+- Canvas rendering system
+- Basic entity management
+- Mouse input handling (unreliable)
+- Timer-based game loop
+- Placeholder animation system
 
-The following document outlines all visual assets needed to replace the current placeholder graphics with final artwork.
+### Systems That Don't Exist Yet
+- Proper collision detection
+- Reliable AI pathfinding
+- Combat mechanics
+- Sound system
+- Save/load functionality
+- Anything resembling game balance
 
-## 🏥 Building Assets
+## 🐛 Debugging This Mess
 
-### Hospital
-**File Format**: PNG with transparency
-**Dimensions**: 64x64 pixels
-**Required Animations**:
+### Common Issues
+- **Nothing happens when I click**: Mouse detection is flaky
+- **Game window disappears**: You probably hit F12 by accident
+- **Red squares won't move**: Selection system is broken
+- **Performance is awful**: Everything is inefficient
+- **Crashes randomly**: Welcome to v0.0.1
 
-1. **Construction Animation**
-   - **Files**: `hospital_build_01.png` through `hospital_build_09.png`
-   - **Frame Count**: 9 frames
-   - **Duration**: ~1.2 seconds total (8 ticks per frame at 60 FPS)
-   - **Description**: Building construction from foundation to completion
+### Debug Info
+- Check console output for exceptions
+- Task Manager to kill if it hangs
+- System tray might have orphaned processes
 
-2. **Idle Animation**
-   - **Files**: `hospital_idle_01.png` through `hospital_idle_04.png`
-   - **Frame Count**: 4 frames
-   - **Duration**: Loops continuously (8 ticks per frame at 60 FPS)
-   - **Description**: Subtle ambient animation (lights, smoke, etc.)
+## 🚧 Development Status
 
-**Visual Guidelines**:
-- Medical/military aesthetic
-- Clear distinction from background
-- Visible from top-down perspective
-- Green color scheme preferred (matches current placeholder)
+### Barely Working
+- [x] Basic WPF application structure
+- [x] Canvas-based rendering
+- [x] Global mouse hooks (somewhat)
+- [x] Entity positioning system
+- [x] Basic timer loops
 
-## 👥 Unit Assets
+### Not Working
+- [ ] Reliable input handling
+- [ ] Proper game logic
+- [ ] Combat system
+- [ ] AI behaviors
+- [ ] Performance optimization
+- [ ] Error handling
+- [ ] User experience
 
-### Player Soldiers
-**File Format**: PNG with transparency
-**Dimensions**: 16x16 pixels
-**Required States**:
+### Pipe Dreams
+- [ ] Actual graphics
+- [ ] Sound effects
+- [ ] Multiple unit types
+- [ ] Real RTS mechanics
+- [ ] Stability
+- [ ] Fun gameplay
 
-1. **Idle Animation**
-   - **Files**: `soldier_idle_01.png` through `soldier_idle_04.png`
-   - **Frame Count**: 4 frames
-   - **Description**: Standing guard animation
+## 🎨 Future Plans (If This Gets Fixed)
 
-2. **Moving Animation**
-   - **Files**: `soldier_move_01.png` through `soldier_move_06.png`
-   - **Frame Count**: 6 frames
-   - **Description**: Walking/running cycle
+This repository exists to:
+1. Prove the basic concept could work
+2. Test WPF for overlay games
+3. Experiment with RTS mechanics
+4. Eventually add real art assets
+5. Maybe become an actual game someday
 
-3. **Combat Animation**
-   - **Files**: `soldier_combat_01.png` through `soldier_combat_04.png`
-   - **Frame Count**: 4 frames
-   - **Description**: Firing weapon animation
+See `ART-HANDOFF.txt` for completely premature art specifications.
 
-**Visual Guidelines**:
-- Red color scheme (matches current placeholder)
-- Clear silhouette at small size
-- Distinguishable from enemy units
-- Military/tactical appearance
+## 🤝 Contributing
 
-### Enemy Soldiers
-**File Format**: PNG with transparency
-**Dimensions**: 16x16 pixels
-**Required States**: Same as Player Soldiers
+If you're brave enough to work on this broken prototype:
+1. Fork the repo
+2. Try to make something work better
+3. Submit a PR with fixes
+4. Marvel at how many things are broken
 
-**Visual Guidelines**:
-- Blue color scheme (matches current placeholder)
-- Same animation set as player soldiers
-- Clearly hostile/opposing faction design
-- Distinct from player units
+### Priority Fixes Needed
+- [ ] Reliable mouse input detection
+- [ ] Fix entity selection system
+- [ ] Implement actual combat mechanics
+- [ ] Add error handling everywhere
+- [ ] Optimize performance
+- [ ] Make it not crash
 
-## 🎯 UI & Effect Assets
+## 📝 License
 
-### Selection Indicators
-**File Format**: PNG with transparency
-**Dimensions**: Variable (overlay on units)
+MIT License - Feel free to use this code as a learning example of how NOT to structure a game initially.
 
-1. **Unit Selection**
-   - **File**: `selection_ring.png`
-   - **Description**: Highlight for selected individual units
-   - **Color**: Yellow/Gold
+## ⚠️ Disclaimer
 
-2. **Squad Selection**
-   - **File**: `squad_selection.png`
-   - **Description**: Group selection indicator
-   - **Color**: Yellow/Gold variations
+This software is provided "as is" with absolutely no warranties. It may:
+- Crash your system
+- Interfere with other applications
+- Consume excessive resources
+- Not work at all
+- Cause frustration and confusion
 
-### Combat Effects
-**File Format**: PNG with transparency
-**Dimensions**: 8x8 to 16x16 pixels
-
-1. **Muzzle Flash**
-   - **Files**: `muzzle_flash_01.png` through `muzzle_flash_03.png`
-   - **Frame Count**: 3 frames
-   - **Description**: Weapon firing effect
-
-2. **Impact Effect**
-   - **Files**: `impact_01.png` through `impact_03.png`
-   - **Frame Count**: 3 frames
-   - **Description**: Projectile hit effect
-
-## 🔧 Technical Specifications
-
-### File Requirements
-- **Format**: PNG-24 with alpha transparency
-- **Color Profile**: sRGB
-- **Naming Convention**: `entity_state_##.png` (zero-padded frame numbers)
-- **Directory Structure**:
-  ```
-  Graphics/
-  ├── Buildings/
-  │   ├── hospital_build_01.png → hospital_build_09.png
-  │   └── hospital_idle_01.png → hospital_idle_04.png
-  ├── Units/
-  │   ├── soldier_idle_01.png → soldier_idle_04.png
-  │   ├── soldier_move_01.png → soldier_move_06.png
-  │   ├── soldier_combat_01.png → soldier_combat_04.png
-  │   ├── enemy_idle_01.png → enemy_idle_04.png
-  │   ├── enemy_move_01.png → enemy_move_06.png
-  │   └── enemy_combat_01.png → enemy_combat_04.png
-  ├── UI/
-  │   ├── selection_ring.png
-  │   └── squad_selection.png
-  └── Effects/
-      ├── muzzle_flash_01.png → muzzle_flash_03.png
-      └── impact_01.png → impact_03.png
-  ```
-
-### Animation Timing
-- **Frame Rate**: All animations play at 12 FPS (5 engine ticks per frame)
-- **Looping**: Idle animations loop continuously
-- **One-Shot**: Construction, combat effects play once
-
-### Integration Notes
-- Assets will be loaded via `LoadBitmapFromFile()` method
-- Animation frame switching handled automatically
-- Fallback system creates placeholder rectangles if files missing
-- No code changes required for asset integration
-
-## 🎨 Style Guidelines
-
-### Overall Aesthetic
-- **Genre**: Military/Medical RTS
-- **Perspective**: Top-down isometric view
-- **Color Palette**: 
-  - Player: Red/Crimson tones
-  - Enemy: Blue/Navy tones
-  - Hospital: Green/Medical tones
-  - UI: Yellow/Gold accents
-
-### Visual Clarity
-- High contrast for visibility at small sizes
-- Clear faction identification through color coding
-- Readable silhouettes for gameplay recognition
-- Consistent lighting direction across all assets
-
-## 📦 Delivery Requirements
-
-### Asset Package
-1. All PNG files organized in specified directory structure
-2. Reference sheet showing all animations
-3. Color palette guide
-4. Any custom fonts used (if applicable)
-
-### Quality Assurance
-- All assets tested at target resolution (16x16, 64x64)
-- Transparency edges clean and anti-aliased
-- Consistent style across all game elements
-- Frame timing verified for smooth animation
+Use at your own risk. This is a prototype, not production software.
 
 ---
 
-## 🔄 Development Status
+**If you got this far and it actually ran, congratulations! You've experienced the full extent of Null Command RTS v0.0.1.**
 
-### Completed Features ✅
-- Hospital placement and spawning system
-- Soldier AI with squad formation
-- Enemy spawn and combat mechanics
-- Health regeneration system
-- Boss mode functionality
-- Global input handling
-
-### Ready for Art Integration 🎨
-- Asset loading system implemented
-- Animation framework in place
-- Placeholder graphics clearly defined
-- File structure prepared
-
-### Future Enhancements 🚀
-- Sound effects integration
-- Additional unit types
-- Building upgrades
-- Save/load game state
-- Multiplayer networking
-
----
-
-*This prototype provides a solid foundation for the full Null Command RTS experience. All systems are functional and ready for visual enhancement through the art asset pipeline.*
+*Next goal: Make it crash less often.*
